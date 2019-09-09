@@ -1,0 +1,9 @@
+#!/bin/bash -x
+
+exe(){
+    dic="/home/taisei/note/e-unix/command2/pman.py"
+    python3 $dic $@ | less
+
+}
+
+exe $@
