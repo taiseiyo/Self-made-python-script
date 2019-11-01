@@ -4,7 +4,7 @@ import argparse
 import sys
 
 
-def psearch(module):
+def pmodule(module):
     module_list = []
     count = 0
     for nfile in sys.path:
@@ -12,7 +12,8 @@ def psearch(module):
         module_list.append(file_name)
     for files in module_list:
         if(os.path.isfile(files)):
-            print(files)
+            name = files
+            open_file(name)
             count = count+1
     if (count == 0):
         print("may be package")
@@ -20,15 +21,24 @@ def psearch(module):
 
 def parsers():
     parser = argparse.ArgumentParser(description="option setting")
-    parser.add_argument("-s", "--search", help="searching my PYTOHNPATH")
+    parser.add_argument("-m", "--module", help="moduleing my PYTOHNPATH")
     opt = parser.parse_args()
     return opt
 
 
+def open_file(name):
+    if(name != None):
+        f = open(name, "r")
+        print(f.read())
+        f.close()
+    else:
+        pass
+
+
 def main():
     opt = parsers()
-    psearch(opt.search) if \
-        opt.search != None else None
+    pmodule(opt.module) if \
+        opt.module != None else None
 
 
 main()
