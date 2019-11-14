@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+from urllib import request
+from bs4 import BeautifulSoup
+import matplotlib.pyplot as plt
+import numpy as np
+import argparse
+import datetime
+
+name_list = ["kenn", "kyohei", "yuki", "taisei", "fumiya", "soma", "hagi",
+             "michika", "masakazu", "hikaru", "gotti", "ohsaki", "yuta", "naoya", "yukyy", "ryuichiro"]
+name_list = sorted(name_list)
+
+url = "http://www.lsnl.jp/cgi-bin/pytyping?id=lsnl-training&action=list"
+
+
+def html_parse():
+    # parse the html data
+    html = request.urlopen(url)
+    target = BeautifulSoup(html.read(), "lxml")
+    text = target.get_text()
+    lines = [line for line in text.splitlines()]
+    return lines
+
+
+def string_parse(lines):
+    # all data is in review
+    review = []
+    for line in lines:
+        line = str(line).replace("\t", " ").split()
+        review.append(line)
+    return review
+
+
+def count_times(review):
+    # count frequency of times
+    names = []
+    tmp = {}
+    for line in review[:-2]:
+        names.append(line[4])
+    for name in name_list:
+        tmp.update({name: names.count(name)})
+    for i in sorted(tmp.items(), key=lambda x: x[1], reverse=True):
+        print(i)
+
+
+def plot_fig0(review):
+    tmp = []
+    half_data = []
+    week = str(datetime.date.today() -
+               datetime.timedelta(days=8))
+    review = sorted(review[:-2], key=lambda x: x[4])
+    before = review[0][0]
+    for count, i in enumerate(review):
+        if(week < i[0] and before == i[0]):
+            tmp.append(i[6])
+        if(before != i[0]):
+            tmp.clear()
+        half_data.append(i[0] + " " + i[4]+" "+str(max(tmp))
+                         ) if len(tmp) > 0 else None
+        before = i[0]
+    return half_data
+
+
+def plot_fig1(y):
+    new_data = []
+    last_data = []
+    [new_data.append(line.split()) for line in y]
+    date, name = y[0][0], y[0][1]
+    for data in new_data:
+        if(date != data[0]):
+            last_data.append(data)
+        elif(name != data[1]):
+            last_data.append(data)
+        date, name = data[0], data[1]
+    return last_data
+
+
+def plot_fig(last_data):
+    print("option: set style data linespoints")
+    for name in name_list:
+        print("name: "+name)
+        for data in last_data:
+            if (name == data[1]):
+                print(data[0][-2:], data[2])
+        print()
+
+
+def parsers():
+    # option parses
+    parser = argparse.ArgumentParser(description='Process some integers')
+    parser.add_argument("-c", "--count",
+                        action="store_true", help="show histogram of counts")
+    parser.add_argument("-f", "--figure",
+                        action="store_true", help="show figure of score")
+    opt = parser.parse_args()
+    return opt
+
+
+def processing1():
+    # process of opt.count
+    lines = html_parse()
+    review = string_parse(lines)
+    count_times(review)
+
+
+def processing2():
+    # process of opt.figure
+    lines = html_parse()
+    review = string_parse(lines)
+    half_data = plot_fig0(review)
+    last_data = plot_fig1(half_data)
+    plot_fig(last_data)
+
+
+def main():
+    opt = parsers()
+    if(opt.count):
+        processing1()
+    elif(opt.figure):
+        processing2()
+
+
+main()
+# www.lsnl.jp/~ohsaki/software/xdoplot/xdoplot
