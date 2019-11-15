@@ -47,16 +47,10 @@ def plot_fig0(review):
     half_data = []
     week = str(datetime.date.today() -
                datetime.timedelta(days=8))
-    review = sorted(review[:-2], key=lambda x: x[4])
-    before = review[0][0]
+    review = sorted(review[:-1], key=lambda x: x[4])
     for count, i in enumerate(review):
-        if(week < i[0] and before == i[0]):
-            tmp.append(i[6])
-        if(before != i[0]):
-            tmp.clear()
-        half_data.append(i[0] + " " + i[4]+" "+str(max(tmp))
-                         ) if len(tmp) > 0 else None
-        before = i[0]
+        if(week < i[0]):
+            half_data.append(i[0] + " " + i[4]+" "+i[6])
     return half_data
 
 
@@ -64,23 +58,20 @@ def plot_fig1(y):
     new_data = []
     last_data = []
     [new_data.append(line.split()) for line in y]
-    date, name = y[0][0], y[0][1]
-    for data in new_data:
-        if(date != data[0]):
-            last_data.append(data)
-        elif(name != data[1]):
-            last_data.append(data)
-        date, name = data[0], data[1]
-    return last_data
+    return new_data
 
 
 def plot_fig(last_data):
-    print("option: set style data linespoints")
+    count = 0.1
+    print("option: set style data linespoints \nxlabel: date \nylabel: all score")
     for name in name_list:
         print("name: "+name)
+        count = 0
         for data in last_data:
-            if (name == data[1]):
-                print(data[0][-2:], data[2])
+            if(name == data[1]):
+                if(int(int(data[0][-2:])+float(count)) == int(data[0][-2:])):
+                    print(int(data[0][-2:])+float(count), data[2])
+                count = count+0.1
         print()
 
 
