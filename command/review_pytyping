@@ -6,8 +6,7 @@ import numpy as np
 import argparse
 import datetime
 
-name_list = ["kenn", "kyohei", "yuki", "taisei", "fumiya", "soma", "hagi",
-             "michika", "masakazu", "hikaru", "gotti", "ohsaki", "yuta", "naoya", "yukyy", "ryuichiro", "mayaguchi"]
+name_list = ["USER NAME"]
 name_list = sorted(name_list)
 
 url = "http://www.lsnl.jp/cgi-bin/pytyping?id=lsnl-training&action=list"
