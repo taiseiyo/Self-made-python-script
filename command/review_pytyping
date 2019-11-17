@@ -6,7 +6,8 @@ import numpy as np
 import argparse
 import datetime
 
-name_list = ["USER NAME"]
+name_list = ["kenn", "kyohei", "yuki", "taisei", "fumiya", "soma", "hagi",
+             "michika", "masakazu", "hikaru", "gotti", "ohsaki", "yuta", "naoya", "yukyy", "ryuichiro", "mayaguchi"]
 name_list = sorted(name_list)
 
 url = "http://www.lsnl.jp/cgi-bin/pytyping?id=lsnl-training&action=list"
@@ -44,33 +45,50 @@ def count_times(review):
 
 def plot_fig0(review):
     half_data = []
-    fday = str(datetime.date.today() -
+    week = str(datetime.date.today() -
                datetime.timedelta(days=6))
     review = sorted(review[:-1], key=lambda x: x[4])
     for count, i in enumerate(review):
-        if(fday < i[0]):
+        if(week < i[0]):
             half_data.append(i[0] + " " + i[4]+" "+i[6])
     return half_data
 
 
 def plot_fig1(y):
-    new_data = []
+    new_data = [line.split() for line in y]
     last_data = []
-    [new_data.append(line.split()) for line in y]
-    return new_data
+    last = []
+    score = []
+    date = new_data[0][0]
+    name = new_data[0][1]
+    sco = new_data[0][2]
+    last_data.append(date+" "+name+" "+sco)
+    for count, line in enumerate(new_data):
+        if(new_data[count][0] != date):
+            score.clear()
+            score.append(line[2])
+            date = line[0]
+            name = line[1]
+            last_data.append(line[0]+" "+line[1]+" "+max(score))
+        else:
+            if(new_data[count][1] != name):
+                score.clear()
+            date = line[0]
+            name = line[1]
+        score.append(line[2])
+    return last_data
 
 
 def plot_fig(last_data):
     print("option: set style data linespoints \nxlabel: date \nylabel: all score")
     for name in name_list:
         print("name: "+name)
-        count = 0
-        for data in last_data:
-            if(name == data[1]):
-                if(int(int(data[0][-2:])+float(count)) == int(data[0][-2:])):
-                    print(int(data[0][-2:])+float(count), data[2])
-                count = count+0.025
+        for count, data in enumerate(last_data):
+            ldate, lname, lscore = data.split(" ")
+            if(name == lname):
+                print(int(ldate[-2:]), lscore)
         print()
+    pass
 
 
 def parsers():
