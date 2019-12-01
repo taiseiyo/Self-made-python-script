@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+import sys
+import pygame as pg
+from pygame.locals import QUIT, MOUSEBUTTONDOWN, MOUSEMOTION, MOUSEBUTTONUP, KEYDOWN, K_SPACE, K_ESCAPE
+import pyautogui
+
+window_x, window_y = pyautogui.size()
+window = (int(window_x/2), window_y)
+surface = pg.display.set_mode((window))
+white = (255, 255, 255)
+pg.init()
+
+
+def draw(mousepos):
+    fpsclock = pg.time.Clock()
+    for i, j in mousepos:
+        pg.draw.circle(surface, (255, 0, 0), (i, j), 5)
+    fpsclock.tick(15)
+    pg.display.update()
+
+
+def keyboard(get):
+    if(get.type == KEYDOWN):
+        if(get.key == K_SPACE):
+            surface.fill(white)
+        elif(get.key == K_ESCAPE):
+            pg.quit()
+            sys.exit()
+
+
+def main():
+    mousepos = []
+    mouse = False
+    surface.fill(white)
+    while True:
+        for get in pg.event.get():
+            keyboard(get)
+            if(get.type == MOUSEBUTTONDOWN):
+                mouse = True
+            elif(get.type == MOUSEBUTTONUP):
+                mouse = False
+                mousepos.clear()
+            elif(get.type == MOUSEMOTION
+                 and mouse):
+                mousepos.append(get.pos)
+        draw(mousepos)
+
+
+main()
