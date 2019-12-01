@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.7
+#!/usr/bin/env python3
 import sys
 import pygame
 import pyautogui
@@ -64,4 +64,6 @@ def main():
         sur = drawing()
         call = keybutton(sur, nums, key)
         callchange_number(sur, nums, call)
+
+
 main()
