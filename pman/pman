@@ -1,8 +1,8 @@
-#!/bin/bash -x
+#!/bin/bash
 
 exe(){
     dic=~/note/e-unix/command2/pman.py
-    python3 $dic $@ | less
+    python3 $dic $@ 2>/dev/null | less
 }
 
 exe $@
