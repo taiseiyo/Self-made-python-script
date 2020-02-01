@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import sys
 import pygame as pg
-from pygame.locals import QUIT, MOUSEBUTTONDOWN, MOUSEMOTION, MOUSEBUTTONUP, KEYDOWN, K_SPACE, K_ESCAPE
+from pygame.locals import QUIT, MOUSEBUTTONDOWN, MOUSEMOTION, MOUSEBUTTONUP, KEYDOWN, K_SPACE, K_ESCAPE, K_UP, K_LEFT, K_RIGHT, K_DOWN
 import pyautogui
+import subprocess
 
 window_x, window_y = pyautogui.size()
 window = (int(window_x/2), window_y)
@@ -15,26 +16,36 @@ def draw(mousepos):
     fpsclock = pg.time.Clock()
     for i, j in mousepos:
         pg.draw.circle(surface, (255, 0, 0), (i, j), 5)
-    fpsclock.tick(15)
+    fpsclock.tick(25)
     pg.display.update()
 
 
-def keyboard(get):
-    if(get.type == KEYDOWN):
-        if(get.key == K_SPACE):
-            surface.fill(white)
-        elif(get.key == K_ESCAPE):
-            pg.quit()
-            sys.exit()
+def erase_draw(mousepos):
+    fpsclock = pg.time.Clock()
+    for i, j in mousepos:
+        pg.draw.circle(surface, white, (i, j), 12)
+    fpsclock.tick(25)
+    pg.display.update()
 
 
-def main():
-    mousepos = []
-    mouse = False
-    surface.fill(white)
+def mainloope(mousepos, mouse=False, mode=True):
     while True:
         for get in pg.event.get():
-            keyboard(get)
+
+            if(get.type == KEYDOWN):
+                if(get.key == K_SPACE):
+                    surface.fill(white)
+                elif(get.key == K_ESCAPE):
+                    pg.quit()
+                    sys.exit()
+                elif(get.key == K_UP):
+                    cmd = "screenshot -l"
+                    subprocess.call(cmd.split())
+                elif(get.key == K_RIGHT):
+                    mode = True
+                elif(get.key == K_LEFT):
+                    mode = False
+
             if(get.type == MOUSEBUTTONDOWN):
                 mouse = True
             elif(get.type == MOUSEBUTTONUP):
@@ -43,7 +54,15 @@ def main():
             elif(get.type == MOUSEMOTION
                  and mouse):
                 mousepos.append(get.pos)
-        draw(mousepos)
+
+        print(mode)
+        draw(mousepos) if mode == True else erase_draw(mousepos)
+
+
+def main():
+    mousepos = []
+    surface.fill(white)
+    mainloope(mousepos)
 
 
 main()
