@@ -24,11 +24,12 @@ def erase_draw(mousepos):
     fpsclock = pg.time.Clock()
     for i, j in mousepos:
         pg.draw.circle(surface, white, (i, j), 12)
-    fpsclock.tick(25)
+    fpsclock.tick(30)
     pg.display.update()
 
 
 def mainloope(mousepos, mouse=False, mode=True):
+    count = 0
     while True:
         for get in pg.event.get():
 
@@ -39,8 +40,9 @@ def mainloope(mousepos, mouse=False, mode=True):
                     pg.quit()
                     sys.exit()
                 elif(get.key == K_UP):
-                    cmd = "screenshot -l"
+                    cmd = "scrot photo" + str(count)+".png"
                     subprocess.call(cmd.split())
+                    count = count + 1
                 elif(get.key == K_RIGHT):
                     mode = True
                 elif(get.key == K_LEFT):
@@ -55,7 +57,6 @@ def mainloope(mousepos, mouse=False, mode=True):
                  and mouse):
                 mousepos.append(get.pos)
 
-        print(mode)
         draw(mousepos) if mode == True else erase_draw(mousepos)
 
 
