@@ -1,0 +1,21 @@
+body {
+    background-color: yellow;
+    font-family: serif;
+}
+p{
+    font-size: 18px;
+    font-family: serif;
+}
+
+.Num1{
+    font-size: 18px;
+    font-family: serif;   
+}
+
+ul, ol {
+    font-size: 18px;
+    font-family: serif;
+    padding-top:0px;/*リスト上の余白*/
+    padding-bottom:0px;/*リスト下の余白*/
+    padding-left:15px;/*リスト左の余白*/
+}
