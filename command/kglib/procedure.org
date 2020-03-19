@@ -26,7 +26,11 @@
     - [pypi]
     - username = *****
     - password = *****
-    
-    
+
+- 再アップロードする時
+  - setup.py のバージョンを更新してアップロードする
+  - また twine upload --skip-existing dist/* で
+    既に存在しているファイルをスキップする事ができる。
+
 - 終了後は git で管理を行っておく
   - 少くても、メインプログラム、setup.py の管理は必須
