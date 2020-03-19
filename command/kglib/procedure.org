@@ -22,6 +22,11 @@
   - PyPI(https://pypi.org/)にアカウント登録
   - pip install twine
   - twine upload dist/*
-
+  - $HOME/.pypirc に以下の記述を行うと便利
+  [pypi]
+  username = *****
+  passward = *****
+    
+    
 - 終了後は git で管理を行っておく
   - 少くても、メインプログラム、setup.py の管理は必須
