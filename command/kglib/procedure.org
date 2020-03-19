@@ -23,9 +23,9 @@
   - pip install twine
   - twine upload dist/*
   - $HOME/.pypirc に以下の記述を行うと便利
-  [pypi]
-  username = *****
-  passward = *****
+    - [pypi]
+    - username = *****
+    - passward = *****
     
     
 - 終了後は git で管理を行っておく
