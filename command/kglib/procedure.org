@@ -25,7 +25,7 @@
   - $HOME/.pypirc に以下の記述を行うと便利
     - [pypi]
     - username = *****
-    - passward = *****
+    - password = *****
     
     
 - 終了後は git で管理を行っておく
