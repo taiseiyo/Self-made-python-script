@@ -4,6 +4,10 @@ from setuptools import setup, find_packages
 setup(
     name="kg_lib",
     version="0.0.1",
+    description="search book in kwansei gakuin library",
+    author="suzuki taisei",
+    author_email="taiseiyo11@gmail.com",
+    url="https://github.com/taiseiyo/Self-made-python-script/tree/master/command/kglib/",
     packages=find_packages(),
     include_package_data=False,
     install_requires=[
