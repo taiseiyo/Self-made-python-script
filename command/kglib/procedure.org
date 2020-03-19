@@ -1,0 +1,27 @@
+
+- ディレクトリー構成は以下のように行う
+  - **/project名/その他のプログラム
+
+- 開発環境は venv で行うと良い
+  - python -m venv venv (project以下のディレクトリで行う)
+
+- setup.py の作成
+- python setup.py sdist
+  - dist ディレクトリーに **.tar.gz が作成される
+  - この段階で sudo pip install **.tar.gz が可能
+    (この時点でプログラムの動作確認をする)
+
+- 配布用のパッケージの作成
+  - pip install wheel
+  - python setup.py bdist_wheel 
+    (一つ目の手順を行っていないと実行不可)
+    (.whl の方が高速なインストールが可能になる)
+    (dist/以下に **.whl が保存される)
+
+- PyPIにアップロードして公開する
+  - PyPI(https://pypi.org/)にアカウント登録
+  - pip install twine
+  - twine upload dist/*
+
+- 終了後は git で管理を行っておく
+  - 少くても、メインプログラム、setup.py の管理は必須
