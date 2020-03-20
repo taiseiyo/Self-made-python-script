@@ -31,6 +31,7 @@
   - pip install sphinx
   - sphinx-quickstart
     - *****.rst ファイルの作成
+  - make html で HTML を作成して確認する
 
 - 再アップロードする時
   - setup.py のバージョンを更新してアップロードする
