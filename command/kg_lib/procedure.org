@@ -27,6 +27,11 @@
     - username = *****
     - password = *****
 
+- ドキュメント作成には Sphinx を使用する
+  - pip install sphinx
+  - sphinx-quickstart
+    - *****.rst ファイルの作成
+
 - 再アップロードする時
   - setup.py のバージョンを更新してアップロードする
   - また twine upload --skip-existing dist/* で
