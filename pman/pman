@@ -1,7 +1,7 @@
 #!/bin/bash
 
 exe(){
-    dic=~/note/e-unix/command2/pman.py
+    dic=~/your-path/pman.py
     python3 $dic $@ 2>/dev/null | less
 }
 
