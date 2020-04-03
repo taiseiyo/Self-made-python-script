@@ -32,7 +32,7 @@
   - sphinx-quickstart
     - *****.rst ファイルの作成
   - setup.py 内で *****.rst のディレクトリ場所を指定する事ができる
-  - index.rst の中に toctree:: 以下に表示用の rst ファイルを
+  - index.rst のプログラム中の toctree:: 以下に表示用の rst ファイルを
     記述しておく
   - make html で HTML を作成して確認する
 
