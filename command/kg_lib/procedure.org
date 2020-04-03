@@ -31,6 +31,7 @@
   - pip install sphinx
   - sphinx-quickstart
     - *****.rst ファイルの作成
+  - setup.py 内で *****.rst のディレクトリ場所を指定する事ができる
   - make html で HTML を作成して確認する
 
 - 再アップロードする時
