@@ -34,7 +34,8 @@
   - setup.py 内で *****.rst のディレクトリ場所を指定する事ができる
   - index.rst のプログラム中の toctree:: 以下に表示用の rst ファイルを
     記述しておく
-  - make html で HTML を作成して確認する
+  - make html で ***.rst ファイルを ***.html ファイルに出力して 
+    HTML を作成して確認する
 
 - 再アップロードする時
   - setup.py のバージョンを更新してアップロードする
