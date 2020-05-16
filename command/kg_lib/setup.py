@@ -15,8 +15,10 @@ setup(
         "plumbum",
     ],
 
+    # shell 上のコマンドの作成
     entry_points="""
     [console_scripts]
     kg_lib = kg_lib:main
-"""
+    """
+
 )
