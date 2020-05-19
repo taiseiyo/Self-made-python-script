@@ -1,7 +1,0 @@
-#!/bin/bash
-
-ppath(){
-    x=~/note/e-unix/command2/ppath.py
-    env python3 $x $@ | less
-}
-ppath $@
